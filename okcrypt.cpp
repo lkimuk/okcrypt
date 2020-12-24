@@ -53,7 +53,7 @@ void okcrypt::EncryptDES(std::string const& plainData, std::string &cipherData)
 	}
 	catch (const CryptoPP::Exception &e)
 	{
-		std::cerr << e.what() << std::endl;
+		throw e.what();
 	}
 }
 
@@ -69,7 +69,7 @@ void okcrypt::DecryptDES(std::string const& cipherData, std::string &recoveredDa
 	}
 	catch (const CryptoPP::Exception &e)
 	{
-		std::cerr << e.what() << std::endl;
+		throw e.what();
 	}
 }
 
@@ -105,7 +105,7 @@ void okcrypt::Encrypt3DES(std::string const& plainData, std::string &cipherData)
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		throw e.what();
 	}
 }
 
@@ -121,7 +121,7 @@ void okcrypt::Decrypt3DES(std::string const& cipherData, std::string &recoveredD
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		throw e.what();
 	}
 }
 
@@ -229,7 +229,7 @@ void okcrypt::EncryptSHA512(std::string const& msg, std::string& digest)
 	EncryptSHA<SHA512>(msg, digest);
 }
 
-void okcrypt::EncryptSHA3_256(std::string const& msg, std::string &digest)
+void okcrypt::EncryptSHA3_256(std::string const& msg, std::string& digest)
 {
 	EncryptSHA<SHA3_256>(msg, digest);
 }
@@ -251,17 +251,13 @@ const std::string okcrypt::EncryptBase64(std::string const& plainData)
 }
 
 const std::string okcrypt::EncryptMD5(std::string const& msg)
-{
-	std::stringstream ss;
-	HexEncoder encoder(new FileSink(ss));
-	
+{	
 	std::string digest;
 	Weak1::MD5 hash;
 	hash.Update((const byte*)msg.data(), msg.size());
 	digest.resize(hash.DigestSize());
 	hash.Final((byte*)&digest[0]);
 
-	(void)StringSource(digest, true, new Redirector(encoder));
-	return ss.str();
+	return ToHex(digest);
 }
 

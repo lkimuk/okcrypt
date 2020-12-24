@@ -66,8 +66,7 @@ public:
 
 private:
 	template<class SHAType>
-	static void EncryptSHA(std::string const& msg, std::string& digest)
-	{
+	static void EncryptSHA(std::string const& msg, std::string& digest) {
 		SHAType hash;
 		hash.Update((const byte*)msg.data(), msg.size());
 		digest.resize(hash.DigestSize());
