@@ -5,7 +5,7 @@
 #include <Cryptopp/md5.h>
 
 
-SecByteBlock		okcrypt::m_desKey(0x00, DES_EDE2::DEFAULT_KEYLENGTH);
+SecByteBlock        okcrypt::m_desKey(0x00, DES_EDE2::DEFAULT_KEYLENGTH);
 byte                okcrypt::m_desIV[DES_EDE2::BLOCKSIZE];
 
 SecByteBlock        okcrypt::m_3desKey(0x00, DES_EDE3::DEFAULT_BLOCKSIZE);
