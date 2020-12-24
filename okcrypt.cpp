@@ -8,7 +8,7 @@
 SecByteBlock        okcrypt::m_desKey(0x00, DES_EDE2::DEFAULT_KEYLENGTH);
 byte                okcrypt::m_desIV[DES_EDE2::BLOCKSIZE];
 
-SecByteBlock        okcrypt::m_3desKey(0x00, DES_EDE3::DEFAULT_BLOCKSIZE);
+SecByteBlock        okcrypt::m_3desKey(0x00, DES_EDE3::DEFAULT_KEYLENGTH);
 byte                okcrypt::m_3desIV[DES_EDE3::BLOCKSIZE];
 
 SecByteBlock        okcrypt::m_aesKey(0x00, AES::DEFAULT_KEYLENGTH);
@@ -51,7 +51,7 @@ void okcrypt::EncryptDES(std::string const& plainData, std::string &cipherData)
 	}
 	catch (const CryptoPP::Exception &e)
 	{
-		throw e.what();
+		throw e;
 	}
 }
 
@@ -67,7 +67,7 @@ void okcrypt::DecryptDES(std::string const& cipherData, std::string &recoveredDa
 	}
 	catch (const CryptoPP::Exception &e)
 	{
-		throw e.what();
+		throw e;
 	}
 }
 
@@ -103,7 +103,7 @@ void okcrypt::Encrypt3DES(std::string const& plainData, std::string &cipherData)
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		throw e.what();
+		throw e;
 	}
 }
 
@@ -119,7 +119,7 @@ void okcrypt::Decrypt3DES(std::string const& cipherData, std::string &recoveredD
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		throw e.what();
+		throw e;
 	}
 }
 
@@ -217,44 +217,44 @@ void okcrypt::DecryptRSA(std::string const& cipherData, std::string &recoveredDa
 	);
 }
 
-void okcrypt::EncryptSHA224(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA224(std::string const& msg)
 {
-	EncryptSHA<SHA224>(msg, digest);
+	return EncryptSHA<SHA224>(msg);
 }
 
-void okcrypt::EncryptSHA256(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA256(std::string const& msg)
 {
-	EncryptSHA<SHA256>(msg, digest);
+	return EncryptSHA<SHA256>(msg);
 }
 
-void okcrypt::EncryptSHA384(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA384(std::string const& msg)
 {
-	EncryptSHA<SHA384>(msg, digest);
+	return EncryptSHA<SHA384>(msg);
 }
 
-void okcrypt::EncryptSHA512(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA512(std::string const& msg)
 {
-	EncryptSHA<SHA512>(msg, digest);
+	return EncryptSHA<SHA512>(msg);
 }
 
-void okcrypt::EncryptSHA3_224(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA3_224(std::string const& msg)
 {
-	EncryptSHA<SHA3_224>(msg, digest);
+	return EncryptSHA<SHA3_224>(msg);
 }
 
-void okcrypt::EncryptSHA3_256(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA3_256(std::string const& msg)
 {
-	EncryptSHA<SHA3_256>(msg, digest);
+	return EncryptSHA<SHA3_256>(msg);
 }
 
-void okcrypt::EncryptSHA3_384(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA3_384(std::string const& msg)
 {
-	EncryptSHA<SHA3_384>(msg, digest);
+	return EncryptSHA<SHA3_384>(msg);
 }
 
-void okcrypt::EncryptSHA3_512(std::string const& msg, std::string& digest)
+const std::string okcrypt::EncryptSHA3_512(std::string const& msg)
 {
-	EncryptSHA<SHA3_512>(msg, digest);
+	return EncryptSHA<SHA3_512>(msg);
 }
 
 const std::string okcrypt::EncryptBase64(std::string const& plainData)

@@ -43,17 +43,17 @@ public:
 	static void EncryptRSA(std::string const& plainData, std::string& cipherData);
 	static void DecryptRSA(std::string const& cipherData, std::string& recoveredData);
 
-	// SHA
-	static void EncryptSHA224(std::string const& msg, std::string& digest);
-	static void EncryptSHA256(std::string const& msg, std::string& digest);
-	static void EncryptSHA384(std::string const& msg, std::string& digest);
-	static void EncryptSHA512(std::string const& msg, std::string& digest);
+	// SHA2
+	static const std::string EncryptSHA224(std::string const& msg);
+	static const std::string EncryptSHA256(std::string const& msg);
+	static const std::string EncryptSHA384(std::string const& msg);
+	static const std::string EncryptSHA512(std::string const& msg);
 	
 	// SHA3
-	static void EncryptSHA3_224(std::string const& msg, std::string& digest);
-	static void EncryptSHA3_256(std::string const& msg, std::string& digest);
-	static void EncryptSHA3_384(std::string const& msg, std::string& digest);
-	static void EncryptSHA3_512(std::string const& msg, std::string& digest);
+	static const std::string EncryptSHA3_224(std::string const& msg);
+	static const std::string EncryptSHA3_256(std::string const& msg);
+	static const std::string EncryptSHA3_384(std::string const& msg);
+	static const std::string EncryptSHA3_512(std::string const& msg);
 
 	// Base64
 	static const std::string EncryptBase64(std::string const& plainData);
@@ -70,11 +70,14 @@ public:
 
 private:
 	template<class SHAType>
-	static void EncryptSHA(std::string const& msg, std::string& digest) {
+	static const std::string EncryptSHA(std::string const& msg) {
 		SHAType hash;
+		std::string digest;
 		hash.Update((const byte*)msg.data(), msg.size());
 		digest.resize(hash.DigestSize());
 		hash.Final((byte*)&digest[0]);
+		
+		return ToHex(digest);
 	}
 
 private:
