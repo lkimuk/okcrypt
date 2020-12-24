@@ -219,9 +219,19 @@ void okcrypt::DecryptRSA(std::string const& cipherData, std::string &recoveredDa
 	);
 }
 
+void okcrypt::EncryptSHA224(std::string const& msg, std::string& digest)
+{
+	EncryptSHA<SHA224>(msg, digest);
+}
+
 void okcrypt::EncryptSHA256(std::string const& msg, std::string& digest)
 {
 	EncryptSHA<SHA256>(msg, digest);
+}
+
+void okcrypt::EncryptSHA384(std::string const& msg, std::string& digest)
+{
+	EncryptSHA<SHA384>(msg, digest);
 }
 
 void okcrypt::EncryptSHA512(std::string const& msg, std::string& digest)
@@ -229,9 +239,19 @@ void okcrypt::EncryptSHA512(std::string const& msg, std::string& digest)
 	EncryptSHA<SHA512>(msg, digest);
 }
 
+void okcrypt::EncryptSHA3_224(std::string const& msg, std::string& digest)
+{
+	EncryptSHA<SHA3_224>(msg, digest);
+}
+
 void okcrypt::EncryptSHA3_256(std::string const& msg, std::string& digest)
 {
 	EncryptSHA<SHA3_256>(msg, digest);
+}
+
+void okcrypt::EncryptSHA3_384(std::string const& msg, std::string& digest)
+{
+	EncryptSHA<SHA3_384>(msg, digest);
 }
 
 void okcrypt::EncryptSHA3_512(std::string const& msg, std::string& digest)
@@ -260,4 +280,3 @@ const std::string okcrypt::EncryptMD5(std::string const& msg)
 
 	return ToHex(digest);
 }
-
